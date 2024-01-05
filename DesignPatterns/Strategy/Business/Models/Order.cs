@@ -1,5 +1,6 @@
 ﻿using Strategy.Business.Stratergies.Invoice;
 using Strategy.Business.Stratergies.SaleTax;
+using Strategy.Business.Stratergies.Shipping;
 
 namespace Strategy.Business.Models
 {
@@ -21,6 +22,7 @@ namespace Strategy.Business.Models
         public ShippingDetails ShippingDetails { get; set; }
         public ISalesTaxStrategy SalesTaxStrategy { get; set; }
         public IInvoiceStrategy InvoiceStrategy { get; set; }
+        public IShippingStrategy ShippingStrategy { get; set; }
 
         #region simple approach
         public decimal GetTax()
@@ -60,6 +62,7 @@ namespace Strategy.Business.Models
             {
                 throw new Exception("Unable to finalize order");
             }
+            ShippingStrategy.Ship(this);
         }
     }
 
